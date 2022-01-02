@@ -17,13 +17,12 @@ const $Event = $.RecordType ({
   date: $.NonEmpty ($DateIso),
 });
 
+const $Inquiry_supertypes = [$Person, $Event];
 const $Inquiry = (
   $.NullaryType ('Inquiry')
                 ('')
-                ([$Person, $Event])
-                (x => {
-                  return true
-                })
+                ($Inquiry_supertypes)
+                (x => $Inquiry_supertypes.every (t => t.test (x)))
 );
 
 const valid = {

@@ -4,8 +4,8 @@
   "scripts": {
     "dev:watch": "tailwindcss --input ./src/input.css --output index.css --watch",
     "dev": "vite serve src",
-    "build": "vite build",
-    "preview": "vite preview"
+    "build": "vite build src",
+    "preview": "vite preview src"
   },
   "dependencies": {
     "@tailwindcss/forms": "^0.4.0",
