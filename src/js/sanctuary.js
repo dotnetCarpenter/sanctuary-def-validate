@@ -1,5 +1,5 @@
 import sanctuary from 'sanctuary';
-import $ from 'sanctuary-def';
+import $         from 'sanctuary-def';
 
 const S = sanctuary.create ({
 	checkTypes: import.meta.env.DEV,
