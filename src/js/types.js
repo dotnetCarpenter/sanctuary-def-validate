@@ -6,7 +6,7 @@ const $DateIso = (
                 ('https://www.w3.org/QA/Tips/iso-date')
                 ([$.String])
                 (x => {
-                  debugger;
+                  // debugger;
                   return /^\d{4}-(?:0[1-9]|1[0-2])-(?:0[1-9]|[1-2]\d|3[0-1])$/.test (x)
                 })
 );
@@ -16,10 +16,9 @@ const $Email = (
   $.NullaryType ('Email')
                 ('https://datatracker.ietf.org/doc/html/rfc5322#section-3.4.1')
                 ([$.String])
-                // (x => /^[A-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[A-Z0-9.-]+$/i.test (x))
                 (x => {
-                  debugger;
-                  return /^[A-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[A-Z0-9.-]+$/i.test (x)
+                  // debugger;
+                  return /^[A-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[A-Z0-9](?:[A-Z0-9-]{0,61}[A-Z0-9])?(?:\.[A-Z0-9](?:[A-Z0-9-]{0,61}[A-Z0-9])?)*$/i.test (x)
                 })
 );
 

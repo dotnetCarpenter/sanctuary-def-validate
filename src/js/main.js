@@ -17,22 +17,24 @@ const $Event = $.RecordType ({
   date: $.NonEmpty ($DateIso),
 });
 
-const $Inquiry_supertypes = [$Person, $Event];
 const $Inquiry = (
   $.NullaryType ('Inquiry')
                 ('')
-                ($Inquiry_supertypes)
-                (x => $Inquiry_supertypes.every (t => t.test (x)))
+                ([])
+                (x => S.reduce (b => t => b && S.isRight ($.validate (t) (x)))
+                               (true)
+                               ([$Person, $Event])
+                )
 );
 
 const valid = {
   name: '',
-  email: 'jon@do',
+  email: 'jon',
   date: '2022-01',
 };
 
 log (
-  S.isRight ($.validate ($Inquiry) (valid)),
-  $.test ($.env.concat ([$Person, $Event])) ($Inquiry) (valid)
+  $.validate ($Inquiry) (valid),
+  $.test ($.env.concat ([])) ($Inquiry) (valid)
 );
 
