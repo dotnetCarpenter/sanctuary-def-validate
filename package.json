@@ -9,6 +9,8 @@
   },
   "dependencies": {
     "@tailwindcss/forms": "^0.4.0",
+    "fluture": "^14.0.0",
+    "fluture-sanctuary-types": "^7.1.0",
     "sanctuary": "sanctuary-js/sanctuary#fd5a923db69bba0c8f265a3aef3c413be0e00933",
     "sanctuary-def": "dotnetCarpenter/sanctuary-def#f1ad60190245247b5a6df8518686fe345bb6c7ee",
     "sanctuary-either": "sanctuary-js/sanctuary-either#dc183e2952b62d60d8921b44b0ea2090787e0a12",
