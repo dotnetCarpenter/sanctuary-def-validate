@@ -2,10 +2,10 @@
   "name": "sanctuary-def-validate",
   "version": "0.1.0",
   "scripts": {
-    "dev:watch": "tailwindcss --input ./src/input.css --output index.css --watch",
-    "dev": "vite serve src",
-    "build": "vite build src && mv src/dist . && mv dist docs",
-    "preview": "vite preview src"
+    "dev:watch": "tailwindcss --input ./src/index.css --output index.css --watch",
+    "dev": "vite serve",
+    "build": "vite build",
+    "preview": "vite preview"
   },
   "dependencies": {
     "@tailwindcss/forms": "^0.4.0",
