@@ -139,6 +139,8 @@ const main = S.pipe ([
 
 init (Array.from ($$ ('input')));
 $1 ('form').addEventListener ('change', main);
+// $1 ('form').addEventListener ('change', x => console.log (Object.prototype.toString.call (x)));
+
 
 // debugging
 trace ('model') (model)
