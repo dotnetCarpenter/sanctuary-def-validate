@@ -100,16 +100,11 @@ const update = ({target}) => {
 // -- VIEW
 
 //    disable :: HtmlElement -> Boolean -> Future Never Void
-const disable = HtmlElement => F.encase (bool => HtmlElement.disabled = bool);
+const disable = HtmlElement => bool => HtmlElement.disabled = bool;
 
 const disableButton = disable (HtmlSubmit);
 
 const viewValidation = S.pipe ([
-  // eitherToFuture,
-  // F.and (disableButton (false)),
-  // F.alt (disableButton (true)),
-  // S.either (disableButton (true))
-  //          (disableButton (false)),
   S.either (a => (disableButton (true), S.Left (a)))
            (a => (disableButton (false), S.Right (a))),
 ]);
@@ -137,9 +132,12 @@ const main = S.pipe ([
 // const main = S.compose (model => HtmlValidationOutput.textContent = viewValidation (validation (model)))
 //                        (update);
 
-init (Array.from ($$ ('input')));
+init (
+  S.append ($1 ('[name="eventType"]'))
+           (Array.from ($$ ('input')))
+);
+
 $1 ('form').addEventListener ('change', main);
-// $1 ('form').addEventListener ('change', x => console.log (Object.prototype.toString.call (x)));
 
 
 // debugging
