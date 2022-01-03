@@ -4,7 +4,7 @@
   "scripts": {
     "dev:watch": "tailwindcss --input ./src/input.css --output index.css --watch",
     "dev": "vite serve src",
-    "build": "vite build src && mv src/dist .",
+    "build": "vite build src && mv src/dist . && mv dist docs",
     "preview": "vite preview src"
   },
   "dependencies": {
