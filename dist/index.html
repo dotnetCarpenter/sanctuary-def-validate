@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="icon" type="image/png" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABmJLR0QA/wD/AP+gvaeTAAAEcklEQVRYhaXXS2xVRRwG8N+ZVlqqgkZJ6oMoRgTURCFKqghCF2qCiQmCQRe6cOHG+IY+RLxEU+6tiEbjWmMiRjEYF2g0AhrCI/WBGl/RAEYRiFFRESwU7rg455YWek9v4duc1/z/3zdzZv7zTaJWFIzRYK6gVXQVLsZZ2de/8BO+wHqJtdrsryVtMmyLLpcJ2rAQTTXKPYjXBSWL/XhyAlYarc9TogdRj4jPJd5RtlGwR7AL9Bkv0SwxC7dhWpalT+J5/1mqoLd2Ad0mitaIrsyIVyt7Qqcf8nrTj5JJoqdxe8ax1VHzPG7P8AKWmyrxPsZhu8Rd2vTURHyikBbRKkzALnXmWuSr6gK6TVS2KSPfoGyBTn+cFHkFK5yrz1sSN2KX4FqL7T1RQPrPe7Jh3+BsN7tP3ymRV1AwSoMPMhFbNZntAYdIJ1eKdMJdie3KFuSSF9Qb7UbR5bgQ+/GJJh9VEh/X/rAV5juiBy0O6sSTVEYgXWrfoE6iJfefLzdb4mVpHRiMxC94SJs1Q8Z2uU6wCQcEEy22N0C2zuuxOpe8ZHo2QS+WFp4nRfeKlmGnaLzoOQVjhozvtAVrcIaypanmgjEa7cFoZZNzl1rROrTiM71mK/i3/1tBk0YrRd067Kiao8tkwXc4oFdzYrk7JVbhM+2uqRoYJUr+Q4NooQ5vVG07HIo+x1TRwiBoBYl3coNWCzgtazt8Cc9DhStoDdnGQtnG3KA7HJX4Nntaosu4kxZQ4YquCtIqRbR72MDoqezuCsGPSrp1u3rEAoJfs7sJgWzG1p1Yp09AuzdxD/7EWNEiZdsUfafoES9oqFFCpbNjw4iUpyJeFV2K+7FZullNxrMO+lbJlJGkC/gHHHVezVEd9mn3knYzpDVhJY7gEtHbCgMq7NA4P7v+HcjWbJ0LRqK8H+1+1u5R0X3Zm0ka3JAbU+7n2hHwJYhmnpSACg55hcx0BBcN03pWdv0yYH32cNuwJAX1upxT5WuTSp1gX26eJOOK1gWJtVIPN1XJpKpBRWM1WitYZ8VxPYwSjVagDr25NSWdpFfjgEPeq9dmv6LXcW9moxZUCW3BbIxyxNeK3pD4Amcqme+YD1ymI2cEUg5YpeDftKSmTugb1Etcr83WIYO7zVT2Iln1HIyDooIOz1Ql7zJDsBF9oik67DhW00u6RYuwU73pHvN7lR4kiqYJZqJZ2T7BdqN86GF/5ZCPE/RIl21Ruw4GWrKCRo02oEX0sUNuUnC4asKRILVkH0rMxGZNWivO6XhT2izqEY2X2CSYZ5HfTom8yzmC1ZiD3Y6Ybkn/XmBwKV5sr+BW7BLNcNRWXa47BfIZgk8xJ7Nrtwwkp/rBpFnZ29KZH7FG2RKdvq+JuGRKNtvnZSxbJOYNtOP5AuAFDZl7fRSnZ2+39R/Not0OZ0ezUS6UOB+zsiJT2aIPi551umVDuuVcARWko7EUdw8QMhwOSLymrJTrD2sSUEHBGRrMlZgj7eEEg4/nOyW2iTbo9e4gw5qD/wGwZlk4ELQTpAAAAABJRU5ErkJggg==" />
+	
+	<title>Form Validation with Sanctuary</title>
+  <script type="module" crossorigin src="/assets/index.7a8f57ab.js"></script>
+  <link rel="modulepreload" href="/assets/vendor.fc9b801c.js">
+  <link rel="stylesheet" href="/assets/index.d2657b8f.css">
+</head>
+
+<body class="antialiased text-gray-900 px-6">
+	<h1 class="text-3xl font-bold underline">Form Validation with Sanctuary</h1>
+
+	<div class="max-w-xl mx-auto py-12 md:max-w-4xl grid grid-cols-1 md:grid-cols-2">
+
+		<div class="py-12 px-2">
+			<h2 class="text-2xl font-bold">Please fill in your inquiry</h2>
+			<div class="mt-8 max-w-md">
+				<form class="grid grid-cols-1 gap-6">
+					<label class="block">
+						<span class="text-gray-700">Full name</span>
+						<input
+							type="text"
+							name="name"
+							class="
+								mt-0
+								block
+								w-full
+								px-0.5
+								border-0 border-b-2 border-gray-200
+								focus:ring-0 focus:border-black
+								invalid:border-red-500
+								invalid:bg-red-100
+							"
+							placeholder=""
+						/>
+					</label>
+					<label class="block">
+						<span class="text-gray-700">Email address</span>
+						<input
+							type="email"
+							name="email"
+							class="
+								mt-0
+								block
+								w-full
+								px-0.5
+								border-0 border-b-2 border-gray-200
+								focus:ring-0 focus:border-black
+								invalid:border-red-500
+								invalid:bg-red-100
+							"
+							placeholder="john@example.com"
+						/>
+					</label>
+					<label class="block">
+						<span class="text-gray-700">When is your event?</span>
+						<input
+							type="date"
+							name="date"
+							class="
+								mt-0
+								block
+								w-full
+								px-0.5
+								border-0 border-b-2 border-gray-200
+								focus:ring-0 focus:border-black
+								invalid:border-red-500
+								invalid:bg-red-100
+							"
+						/>
+					</label>
+					<label class="block">
+						<span class="text-gray-700">What type of event is it?</span>
+						<select
+							name="eventType"
+							class="
+								block
+								w-full
+								mt-0
+								px-0.5
+								border-0 border-b-2 border-gray-200
+								focus:ring-0 focus:border-black
+								invalid:border-red-500
+								invalid:bg-red-100
+							"
+						>
+							<option>Corporate event</option>
+							<option>Wedding</option>
+							<option>Birthday</option>
+							<option>Other</option>
+						</select>
+					</label>
+					<label class="block">
+						<span class="text-gray-700">Additional details</span>
+						<textarea
+							name="details"
+							class="
+								mt-0
+								block
+								w-full
+								px-0.5
+								border-0 border-b-2 border-gray-200
+								focus:ring-0 focus:border-black
+								invalid:border-red-500
+								invalid:bg-red-100
+							"
+							rows="2"
+						></textarea>
+					</label>
+					<div class="block">
+						<div class="mt-2">
+							<div>
+								<label class="inline-flex items-center">
+									<input
+										type="checkbox"
+										name="signup"
+										class="
+											border-gray-300 border-2
+											text-black
+											focus:border-gray-300 focus:ring-black
+										"
+									/>
+									<span class="ml-2">Email me news and special offers</span>
+								</label>
+							</div>
+						</div>
+					</div>
+
+					<button
+						disabled
+						class="
+						rounded-full
+						bg-slate-600
+						text-zinc-50
+						py-2
+						disabled:opacity-50
+						disabled:cursor-not-allowed
+						cursor-pointer
+					">Submit Query</button>
+
+				</form>
+			</div>
+		</div>
+
+		<div class="py-12 px-2">
+			<h2 class="text-2xl font-bold">Validation Objects</h2>
+
+			<section id="validationOutput"></section>
+		</div>
+
+	</div>
+
+	
+</body>
+
+</html>
