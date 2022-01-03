@@ -2,7 +2,7 @@
   "name": "sanctuary-def-validate",
   "version": "0.1.0",
   "scripts": {
-    "dev:watch": "tailwindcss --input ./src/index.css --output index.css --watch",
+    "tailwindcss": "tailwindcss --input ./src/index.css --output index.css --watch",
     "dev": "vite serve",
     "build": "vite build",
     "preview": "vite preview"
@@ -21,7 +21,7 @@
   },
   "devDependencies": {
     "postcss": "^8.4.5",
-    "tailwindcss": "^3.0.8",
+    "tailwindcss": "^3.0.9",
     "vite": "^2.7.2"
   }
 }
