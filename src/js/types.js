@@ -1,5 +1,11 @@
 import { $ } from './sanctuary.js';
 
+//    createEnum :: String -> Array String -> Type
+const createEnum = name => values => $.EnumType
+  (name)
+  ('')
+  (values)
+
 //    $DateIso :: NullaryType
 const $DateIso = (
   $.NullaryType ('DateIso')
@@ -23,6 +29,7 @@ const $Email = (
 );
 
 export {
+  createEnum,
   $DateIso,
   $Email
 };

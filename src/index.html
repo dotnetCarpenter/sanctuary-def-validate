@@ -12,16 +12,17 @@
 <body class="antialiased text-gray-900 px-6">
 	<h1 class="text-3xl font-bold underline">Form Validation with Sanctuary</h1>
 
-	<div class="max-w-xl mx-auto py-12 divide-y md:max-w-4xl">
+	<div class="max-w-xl mx-auto py-12 md:max-w-4xl grid grid-cols-1 md:grid-cols-2">
 
 		<div class="py-12">
 			<h2 class="text-2xl font-bold">Please fill in your details</h2>
 			<div class="mt-8 max-w-md">
-				<div class="grid grid-cols-1 gap-6">
+				<form class="grid grid-cols-1 gap-6">
 					<label class="block">
 						<span class="text-gray-700">Full name</span>
 						<input
 							type="text"
+							name="name"
 							class="
 								mt-0
 								block
@@ -39,6 +40,7 @@
 						<span class="text-gray-700">Email address</span>
 						<input
 							type="email"
+							name="email"
 							class="
 								mt-0
 								block
@@ -56,6 +58,7 @@
 						<span class="text-gray-700">When is your event?</span>
 						<input
 							type="date"
+							name="date"
 							class="
 								mt-0
 								block
@@ -71,6 +74,7 @@
 					<label class="block">
 						<span class="text-gray-700">What type of event is it?</span>
 						<select
+							name="eventType"
 							class="
 								block
 								w-full
@@ -91,6 +95,7 @@
 					<label class="block">
 						<span class="text-gray-700">Additional details</span>
 						<textarea
+							name="details"
 							class="
 								mt-0
 								block
@@ -110,6 +115,7 @@
 								<label class="inline-flex items-center">
 									<input
 										type="checkbox"
+										name="signup"
 										class="
 											border-gray-300 border-2
 											text-black
@@ -121,8 +127,14 @@
 							</div>
 						</div>
 					</div>
-				</div>
+
+				</form>
 			</div>
+		</div>
+
+		<div class="py-12">
+			<h2 class="text-2xl font-bold">Validation Objects</h2>
+
 		</div>
 
 	</div>

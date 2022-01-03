@@ -4,28 +4,22 @@ import { S, $ } from './sanctuary.js';
 import {
   $DateIso,
   $Email,
+  createEnum
 }               from './types.js';
 
 const log = console.log;
+const $$ = s => document.querySelectorAll (s);
+const $_ = s => document.querySelector (s);
 
-const $Person = $.RecordType ({
+const $Inquiry =$.RecordType ({
   name: $.NonEmpty ($.String),
   email: $.NonEmpty ($Email),
-});
-
-const $Event = $.RecordType ({
   date: $.NonEmpty ($DateIso),
+  eventType: createEnum ('EventType')
+                        (['Corporate event', 'Wedding', 'Birthday', 'Other']),
+  details: $.String,
+  signup: $.Boolean
 });
-
-const $Inquiry = (
-  $.NullaryType ('Inquiry')
-                ('')
-                ([])
-                (x => S.reduce (b => t => b && S.isRight ($.validate (t) (x)))
-                               (true)
-                               ([$Person, $Event])
-                )
-);
 
 const valid = {
   name: '',
@@ -33,8 +27,11 @@ const valid = {
   date: '2022-01',
 };
 
+$_ ('form').addEventListener ('keyup', log)
+
+
 log (
   $.validate ($Inquiry) (valid),
-  $.test ($.env.concat ([])) ($Inquiry) (valid)
+  $.test ([]) ($Inquiry) (valid)
 );
 
