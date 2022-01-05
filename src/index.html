@@ -5,27 +5,24 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="icon" type="image/png" href="favicon.png" />
-	<link href="/index.css" rel="stylesheet">
+	<link href="/style.css" rel="stylesheet">
 	<title>Form Validation with Sanctuary</title>
 </head>
 
 <body class="antialiased text-gray-900 px-6">
 	<h1 class="text-3xl font-bold underline">Form Validation with Sanctuary</h1>
 
-	<div class="max-w-xl mx-auto py-12 md:max-w-4xl grid grid-cols-1 md:grid-cols-2">
+	<div class="max-w-xl mx-auto md:max-w-4xl grid grid-cols-1 md:grid-cols-2">
 
 		<div class="py-12 px-2">
 			<h2 class="text-2xl font-bold">Please fill in your inquiry</h2>
 			<div class="mt-8 max-w-md">
-				<form class="grid grid-cols-1 gap-6" name="inquiry">
-					<p id="error$$" class="invisible font-bold text-red-600 text-right">You have invalid form inputs</p>
+				<form class="grid grid-cols-1 gap-2" name="inquiry">
+					<p class="formError invisible font-bold text-red-600 text-right mb-6">&nbsp;</p>
 
 					<label class="block">
 						<span class="text-gray-700">Full name</span>
-						<input
-							type="text"
-							name="name"
-							class="
+						<input type="text" name="name" class="
 								mt-0
 								block
 								w-full
@@ -34,18 +31,13 @@
 								focus:ring-0 focus:border-black
 								invalid:border-red-500
 								invalid:bg-red-100
-							"
-							placeholder=""
-						/>
-						<span id="errorName" class="invisible font-bold text-red-600 text-right inline-block w-full">Name is required</span>
+							" placeholder="" />
 					</label>
+					<span class="nameError invisible font-bold text-red-600 text-right mb-6 inline-block w-full">Name is required</span>
 
 					<label class="block">
 						<span class="text-gray-700">Email address</span>
-						<input
-							type="email"
-							name="email"
-							class="
+						<input type="email" name="email" class="
 								mt-0
 								block
 								w-full
@@ -54,18 +46,13 @@
 								focus:ring-0 focus:border-black
 								invalid:border-red-500
 								invalid:bg-red-100
-							"
-							placeholder="john@example.com"
-						/>
-						<span id="errorEmail" class="invisible font-bold text-red-600 text-right inline-block w-full">Email is required and must be a valid email address</span>
+							" placeholder="john@example.com" />
 					</label>
+					<span class="emailError invisible font-bold text-red-600 text-right mb-6 inline-block w-full">Email is required and must be a valid email address</span>
 
 					<label class="block">
 						<span class="text-gray-700">When is your event?</span>
-						<input
-							type="date"
-							name="date"
-							class="
+						<input type="date" name="date" class="
 								mt-0
 								block
 								w-full
@@ -74,16 +61,13 @@
 								focus:ring-0 focus:border-black
 								invalid:border-red-500
 								invalid:bg-red-100
-							"
-						/>
-						<span id="errorDate" class="invisible font-bold text-red-600 text-right inline-block w-full">An event date is required</span>
+							" />
 					</label>
+					<span class="dateError invisible font-bold text-red-600 text-right mb-6 inline-block w-full">An event date is required</span>
 
 					<label class="block">
 						<span class="text-gray-700">What type of event is it?</span>
-						<select
-							name="eventType"
-							class="
+						<select name="eventType" class="
 								block
 								w-full
 								mt-0
@@ -92,55 +76,44 @@
 								focus:ring-0 focus:border-black
 								invalid:border-red-500
 								invalid:bg-red-100
-							"
-						>
+							">
 							<option>Corporate event</option>
 							<option>Wedding</option>
 							<option>Birthday</option>
 							<option>Other</option>
 						</select>
-						<span id="errorEventType" class="invisible font-bold text-red-600 text-right inline-block w-full">We currently do not do weddings</span>
 					</label>
+					<span class="eventTypeError invisible font-bold text-red-600 text-right mb-6 inline-block w-full">We currently do not do weddings</span>
+
 
 					<label class="block">
 						<span class="text-gray-700">Additional details</span>
-						<textarea
-							name="details"
-							class="
+						<textarea name="details" class="
 								mt-0
 								block
 								w-full
 								px-0.5
 								border-0 border-b-2 border-gray-200
 								focus:ring-0 focus:border-black
-							"
-							rows="2"
-						></textarea>
+							" rows="2"></textarea>
 					</label>
 
 					<div class="block">
 						<div class="mt-2">
 							<div>
 								<label class="inline-flex items-center">
-									<input
-										type="checkbox"
-										name="signup"
-										class="
+									<input type="checkbox" name="signup" class="
 											border-gray-300 border-2
 											text-black
 											focus:border-gray-300 focus:ring-black
-										"
-									/>
+										" />
 									<span class="ml-2">Email me news and special offers</span>
 								</label>
 							</div>
 						</div>
 					</div>
 
-					<input
-						type="submit"
-						disabled
-						class="
+					<input type="submit" disabled class="
 						rounded-full
 						bg-slate-600
 						text-zinc-50
@@ -148,7 +121,7 @@
 						disabled:opacity-50
 						disabled:cursor-not-allowed
 						cursor-pointer
-					"/>
+					" />
 
 				</form>
 			</div>
@@ -157,7 +130,7 @@
 		<div class="py-12 px-2">
 			<h2 class="text-2xl font-bold">Validation Objects</h2>
 
-			<section id="validationOutput"></section>
+			<section id="validationOutput" class="mt-8 max-w-md"></section>
 		</div>
 
 	</div>
