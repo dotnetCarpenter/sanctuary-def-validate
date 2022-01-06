@@ -3,7 +3,6 @@ import '../style.css';
 import {
   S,
   $,
-  F,
   show
 } from './sanctuary.js';
 
@@ -27,7 +26,7 @@ const $$ = s => document.querySelectorAll (s);
 const $1 = s => document.querySelector (s);
 
 //    eitherToFuture :: Either a b -> Future a b
-const eitherToFuture = S.either (F.reject) (F.resolve);
+// const eitherToFuture = S.either (F.reject) (F.resolve);
 
 //    setProperty :: Object -> String -> a -> a
 const setProperty = object => prop => value => (object[prop] = value, value);
@@ -217,25 +216,19 @@ const outputValidation = hideSideEffect (S.pipe ([
 
 //    main :: ChangeEvent -> Future (Array ValidationError) a
 const main = S.pipe ([
-  F.encase (update),                     // Future Error Model
+  update,           // Model
   trace ('after update'),
-  S.map (trace ('map after update')),
-  F.chain (F.encase (validation)),       // Future Error Either (Array ValidationError) a
-  F.chain (F.encase (outputValidation)), // Future Error Either (Array ValidationError) a
-  F.chain (F.encase (viewValidation)),   // Future Error Maybe StrMap
-  F.chain (F.encase (dispatchErrors))    // Future Error Maybe StrMap
+  validation,       // Either (Array ValidationError) a
+  S.map (trace ('map after validation')),
+  outputValidation, // Either (Array ValidationError) a
+  viewValidation,   // Maybe StrMap
+  dispatchErrors    // Maybe StrMap
 ]);
-
-const fork = F.fork (console.error)
-                    (console.debug);
 
 // TODO: make init work with queryStrings e.g. ?name=Jon&email=jon.ronnenberg%40gmail.com&date=2022-01-08&eventType=Corporate+event&details=&signup=on
 init (HtmlFields);
 
-HtmlForm.addEventListener ('change',
-  S.compose (fork)
-            (main)
-);
+HtmlForm.addEventListener ('change', main);
 
 // debugging
 trace ('model') (Model)
