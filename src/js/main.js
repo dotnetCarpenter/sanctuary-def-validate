@@ -19,6 +19,11 @@ import {
 
 const trace = msg => x => (console.debug (`[${msg}]:`, x), x);
 
+const debug = x => {
+  debugger
+  return x;
+};
+
 //    $$ :: String -> Array HtmlElement
 const $$ = s => document.querySelectorAll (s);
 
@@ -39,7 +44,7 @@ const hideSideEffect = f => a => (f (a), a);
 
 const $Inquiry =$.RecordType ({
   name: $.NonEmpty ($.String),
-  email: $Email,
+  email: $.NonEmpty ($Email),
   date: $.NonEmpty ($DateIso),
   eventType: createEnum ('EventType')
                         (['Corporate event', 'Birthday', 'Other']),
@@ -47,14 +52,14 @@ const $Inquiry =$.RecordType ({
   signup: $.Boolean
 });
 
-const Model = {
+const State = {
   name: '',
   email: '',
   date: '',
   eventType: '',
   details: '',
   signup: false
-}
+};
 
 // const State = {
 //   ...Model,
@@ -89,34 +94,34 @@ const HtmlFields = [HtmlName, HtmlEmail, HtmlDate, HtmlEventType, HtmlDetails, H
 const update = ({target}) => {
   switch (target) {
     case HtmlName:
-      Model.name = S.trim (target.value);
+      State.name = S.trim (target.value);
       break;
 
     case HtmlEmail:
-      Model.email = S.trim (target.value);
+      State.email = S.trim (target.value);
       break;
 
     case HtmlDate:
-      Model.date = target.value;
+      State.date = target.value;
       break;
 
     case HtmlEventType:
-      Model.eventType = target.value;
+      State.eventType = target.value;
       break;
 
     case HtmlDetails:
-      Model.details = S.trim (target.value);
+      State.details = S.trim (target.value);
       break;
 
     case HtmlSignup:
-      Model.signup = Boolean (target.checked);
+      State.signup = Boolean (target.checked);
       break;
 
     default:
       throw new TypeError ('update :: Unhandled HtmlElement ' + target.name || target.id || target.className);
   }
 
-  return Model;
+  return State;
 };
 
 //    displayError :: String -> HtmlElement -> Void
@@ -163,44 +168,39 @@ const HtmlLookup = {
   eventType: [HtmlEventType, HtmlEventTypeError],
 };
 
-//    formatErrors :: Array ValidationError -> StrMap
-const formatErrors = S.pipe ([
-  S.map (error => {
-    let text = ErrorDictionary[error.name];
+//    outputValidation :: a -> a
+const outputValidation = hideSideEffect (S.pipe ([
+  show,
+  setProperty (HtmlValidationOutput) ('textContent')
+]));
 
-    return text === undefined
-      ? S.Nothing
-      : S.Just ({ name: error.name, text });
-  }),
-  S.reduce (accu => S.maybe (accu)
-                            (e => (S.insert (e.name) (e.text) (accu))))
-           ({}),
-]);
+//    formatErrors :: Array ValidationError -> Array (Pair HtmlElementId String)
+const formatErrors = S.map (error => S.Pair (error.name) (ErrorDictionary[error.name]));
 
-//    viewValidation :: Either (Array ValidationError) a -> Maybe StrMap
+//    viewValidation :: Either (Array ValidationError) a -> Maybe (Array (Pair HtmlElementId String))
 const viewValidation = (
   S.either (S.compose (S.Just) (formatErrors))
            (S.K (S.Nothing))
 );
 
-// TODO: should not handle disable/enable of submit
-//    dispatchErrors :: Maybe StrMap -> Maybe StrMap
+//    dispatchErrors :: Maybe (Array (Pair HtmlElementId String)) -> Maybe (Array (Pair HtmlElementId String))
 const dispatchErrors = S.pipe ([
-  S.map (S.pairs),
   S.map (S.map (hideSideEffect (
     S.pair (key => text => {
       return S.map (displayError (text)) (HtmlLookup[key]);
     })
   ))),
-  trace ('after displayError'),
-  S.ifElse (S.isNothing)
-           (hideSideEffect (() => HtmlSubmit.disabled = false))
-           (hideSideEffect (() => HtmlSubmit.disabled = true)),
+  // debugging
+  S.promap (f => S.Pair (S.show (f)) (f))
+           (S.snd)
+           (S.mapLeft (trace ('after displayError'))),
 ]);
 
 
 
 // -- MAIN
+
+// HtmlElementId :: String
 
 //    init :: Array (HtmlElement) -> Model
 const init = S.pipe ([
@@ -208,21 +208,17 @@ const init = S.pipe ([
   S.map (update)
 ]);
 
-//    outputValidation :: a -> a
-const outputValidation = hideSideEffect (S.pipe ([
-  show,
-  setProperty (HtmlValidationOutput) ('textContent')
-]));
-
 //    main :: ChangeEvent -> Future (Array ValidationError) a
 const main = S.pipe ([
-  update,           // Model
-  trace ('after update'),
-  validation,       // Either (Array ValidationError) a
-  S.map (trace ('map after validation')),
-  outputValidation, // Either (Array ValidationError) a
-  viewValidation,   // Maybe StrMap
-  dispatchErrors    // Maybe StrMap
+  update,                // Model                                     :> Pair HtmlElementId Model
+  validation,            // Either (Array ValidationError) a          :> Pair HtmlElementId (Either (Array ValidationError) Model)
+  S.mapLeft (trace ('validation')),
+  outputValidation,      // Either (Array ValidationError) a          :> Pair HtmlElementId (Either (Array ValidationError) Model)
+  viewValidation,        // Maybe (Array (Pair HtmlElementId String))
+  dispatchErrors,        // Maybe (Array (Pair HtmlElementId String))
+  S.ifElse (S.isNothing)
+           (hideSideEffect (() => HtmlSubmit.disabled = false))
+           (hideSideEffect (() => HtmlSubmit.disabled = true)),
 ]);
 
 // TODO: make init work with queryStrings e.g. ?name=Jon&email=jon.ronnenberg%40gmail.com&date=2022-01-08&eventType=Corporate+event&details=&signup=on
@@ -231,4 +227,4 @@ init (HtmlFields);
 HtmlForm.addEventListener ('change', main);
 
 // debugging
-trace ('model') (Model)
+trace ('model') (State)
